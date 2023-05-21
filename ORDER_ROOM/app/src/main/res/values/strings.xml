@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Đặt phòng</string>
+    <string name="Trangchu">Trang chủ</string>
+    <string name="open">DATPHONG</string>
+    <string name="DonDat">Đơn đặt </string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
