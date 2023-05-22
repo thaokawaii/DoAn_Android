@@ -11,24 +11,36 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.order_room.Model.KHACHSAN;
+import com.example.order_room.Model.KhachSanAdapter;
 import com.example.order_room.R;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TrangChu extends AppCompatActivity {
     private DrawerLayout drawerLayout;
+
+
+
     ListView listView;
 
-    String connectionResult="";
-    Connection connect;
     NavigationView navigationView;
-    List<String> list;
+    List<KHACHSAN> list=new ArrayList<>();
+    private DatabaseReference databaseReference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +48,43 @@ public class TrangChu extends AppCompatActivity {
 
         check_internet();
         menu();
+       loadKS();
+    }
+    private void load() {
+
+
+
+        KhachSanAdapter khachSanAdapter = new KhachSanAdapter(list,this);
+
+        listView = findViewById(R.id.list_khachsan);
+        listView.setAdapter(khachSanAdapter);
+
+    }
+    private void loadKS()
+    {
+        databaseReference = FirebaseDatabase.getInstance().getReference("KHACHSAN");
+
+        // Lấy dữ liệu từ Firebase
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    KHACHSAN item = dataSnapshot.getValue(KHACHSAN.class);
+                    list.add(item);
+                    Log.e("T",item.toString());
+                    load();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+
+        });
     }
     public void menu()
     {

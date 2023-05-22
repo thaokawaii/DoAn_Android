@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:background="@color/overlayBackground"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="4dp">
+    <RelativeLayout
+        android:layout_margin="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/ks_image"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/name_ks"
+            android:background="@color/overlayBackground"
+            android:text="Name hotel"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:layout_alignParentBottom="true"
+            android:textColor="@android:color/white" />
+    </RelativeLayout>
+    
+</androidx.cardview.widget.CardView>
+

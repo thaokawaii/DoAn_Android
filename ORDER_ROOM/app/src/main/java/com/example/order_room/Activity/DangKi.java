@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,7 +30,7 @@ EditText ten,diachi,sdt,email,matkhau,xnpass;
     RadioGroup genderRadioGroup;
 Button btn;
 final int gt=1;
-    @Override
+//    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dang_ki);
@@ -110,11 +111,12 @@ final int gt=1;
     }
     Boolean kiemtra()
     {
-        if(email.getText().length()==0||diachi.getText().length()==0||ten.getText().length()==0||sdt.getText().length()==0||matkhau.getText().length()==0||xnpass.getText().length()==0)
+        if(isEmailValid()==false)
         {
             return false;
-        }
-        else {
+        } else if (ten.getText().length()==0||diachi.getText().length()==0||sdt.getText().length()==0||matkhau.getText().length()==0) {
+            return false;
+        } else {
             return true;
         }
     }
@@ -125,4 +127,21 @@ final int gt=1;
         String gender = selectedRadioButton.getText().toString();
         return gender;
     }
+
+    private boolean isEmailValid() {
+        if (!Patterns.EMAIL_ADDRESS.matcher(email.getText()).matches()) {
+            email.setError("Vui lòng nhập đúng định dạng email!");
+            return false;
+        } else {
+            email.setError(null);
+            return true;
+        }
+    }
+    private void ktpass() {
+        if (!matkhau.getText().toString().trim().equals(xnpass.getText().toString().trim())) {
+            xnpass.setError("Mật khẩu không khớp!");
+            Toast.makeText(this, "Khong khop", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }
