@@ -71,7 +71,7 @@ final int gt=1;
 
                 final ProgressDialog dialog=new ProgressDialog(DangKi.this);
                 dialog.setMessage("Please Waiting....");
-                dialog.show();
+
                 table_kh.addValueEventListener(new ValueEventListener() {
 
                     @Override
@@ -83,6 +83,7 @@ final int gt=1;
                                 Toast.makeText(DangKi.this, "Số điện thoại đã được đăng ký", Toast.LENGTH_SHORT).show();
                             }
                             else {
+                                dialog.show();
                                 dialog.dismiss();
                                 KHACHHANG kh=new KHACHHANG(diachi.getText().toString(),email.getText().toString(),traveGT(),ten.getText().toString(),matkhau.getText().toString(),sdt.getText().toString());
                                 table_kh.child(sdt.getText().toString()).setValue(kh);

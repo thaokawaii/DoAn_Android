@@ -74,12 +74,13 @@
                 android:inputType="textPassword"
                 android:lines="1"
                 android:maxLines="1"
+
                 android:textColorHint="#675F5F"
                 />
           <ImageView
               android:id="@+id/hienpass"
               android:layout_gravity="center"
-              android:layout_width="wrap_content"
+              android:layout_width="20dp"
               android:layout_height="wrap_content"
               android:src="@drawable/baseline_remove_red_eye_24"
               ></ImageView>

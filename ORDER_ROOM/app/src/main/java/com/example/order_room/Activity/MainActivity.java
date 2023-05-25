@@ -5,8 +5,6 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -17,14 +15,14 @@ import android.os.Bundle;
 
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.ImageView;
 import android.widget.ListView;
 
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.order_room.Adapter.DataLocalManager;
 import com.example.order_room.Model.KHACHSAN;
-import com.example.order_room.Model.KhachSanAdapter;
+import com.example.order_room.Adapter.KhachSanAdapter;
+import com.example.order_room.Model.User;
 import com.example.order_room.R;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
@@ -44,6 +42,10 @@ public class MainActivity extends AppCompatActivity {
     List<KHACHSAN> list=new ArrayList<>();
 
     private DatabaseReference databaseReference;
+
+    public MainActivity() {
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,29 +53,45 @@ public class MainActivity extends AppCompatActivity {
          check_internet();
 
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("KHACHSAN");
 
-        // Lấy dữ liệu từ Firebase
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    KHACHSAN item = dataSnapshot.getValue(KHACHSAN.class);
-                    list.add(item);
-                    Log.e("T",item.toString());
-                    load();
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-
-
-        });
+//        KhachSanAdapter productAdapter = new KhachSanAdapter( list,this);
+//        databaseReference = FirebaseDatabase.getInstance().getReference("KHACHSAN");
+//
+//        // Lấy dữ liệu từ Firebase
+//        databaseReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//
+//                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+//                    KHACHSAN item = dataSnapshot.getValue(KHACHSAN.class);
+//                    list.add(item);
+//
+//                    load();
+//                }
+////                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+////                    @Override
+////                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+////                       KHACHSAN ks= (KHACHSAN) productAdapter.getItem(position);
+////                        String productCode = ks.getSDT();
+////
+////                        Intent intent = new Intent();
+////                        intent.putExtra("PRODUCT_CODE", productCode);
+////                        setResult(RESULT_OK, intent);
+////                        Log.e("SDT ks",productCode);
+////
+////                    }
+////                });
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//
+//
+//        });
+//
 
 
     }

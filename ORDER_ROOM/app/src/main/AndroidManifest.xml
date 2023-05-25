@@ -11,34 +11,48 @@
         android:icon="@mipmap/ic_launcher_foreground"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+        android:theme="@style/Theme.ORDER_ROOM"
         tools:targetApi="31">
+        <activity
+            android:name=".Activity.ChonNgay"
+            android:exported="true" >
+
+        </activity>
+        <activity
+            android:name=".Activity.DatPhong"
+            android:exported="true"
+       >
+
+        </activity>
+        <activity
+            android:name=".Activity.Phong"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.Loai"
+            android:exported="true" />
         <activity
             android:name=".Activity.DonDat"
             android:exported="false" />
         <activity
             android:name=".Activity.TrangChu"
-            android:exported="false" />
+            android:exported="true">
+
+        </activity>
         <activity
             android:name=".Activity.DangKi"
             android:exported="false" />
         <activity
             android:name=".Activity.DangNhap"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".Activity.MainActivity"
-            android:exported="true">
-
-
-        </activity>
+            android:exported="true" />
     </application>
 
 </manifest>

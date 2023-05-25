@@ -13,11 +13,18 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.order_room.Adapter.DataLocalManager;
+import com.example.order_room.Adapter.KhachSanAdapter;
+import com.example.order_room.Adapter.LoaiPhongAdapter;
 import com.example.order_room.Model.KHACHSAN;
-import com.example.order_room.Model.KhachSanAdapter;
+
+import com.example.order_room.Model.LOAIPHONG;
+import com.example.order_room.Model.User;
 import com.example.order_room.R;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
@@ -46,9 +53,49 @@ public class TrangChu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trang_chu);
 
+
+
+        listView = findViewById(R.id.list_khachsan);
         check_internet();
         menu();
-       loadKS();
+        KhachSanAdapter productAdapter = new KhachSanAdapter( list,this);
+        databaseReference = FirebaseDatabase.getInstance().getReference("KHACHSAN");
+
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                   KHACHSAN item = dataSnapshot.getValue(KHACHSAN.class);
+                    list.add(item);
+
+                    load();
+                }
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                       KHACHSAN ks= (KHACHSAN) productAdapter.getItem(position);
+                       Intent intent=new Intent(TrangChu.this,Loai.class);
+                        String productCode = ks.getSDT();
+                        intent.putExtra("Ma", productCode);
+                        setResult(RESULT_OK, intent);
+                        Log.e("SDT ks",productCode);
+                        startActivity(intent);
+
+                    }
+                });
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+
+        });
     }
     private void load() {
 
@@ -115,6 +162,9 @@ public class TrangChu extends AppCompatActivity {
                         startActivity(i);
                         return true;
                     case R.id.Logout:
+                        DataLocalManager.init(getApplicationContext());
+                        User user= DataLocalManager.getUser();
+                        DataLocalManager.remove(user);
                         Toast.makeText(TrangChu.this, "Đăng xuất", Toast.LENGTH_SHORT).show();
                         Intent y=new Intent(TrangChu.this,DangNhap.class);
                         startActivity(y);
@@ -141,4 +191,17 @@ public class TrangChu extends AppCompatActivity {
                     .show();
         }
     }
+    private void put()
+    {
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent room=new Intent(TrangChu.this,Loai.class);
+                room.putExtra("Ma",databaseReference.getRef().getKey());
+                startActivity(room);
+            }
+        });
+    }
+
 }
