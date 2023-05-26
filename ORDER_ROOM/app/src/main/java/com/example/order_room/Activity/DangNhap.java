@@ -44,9 +44,11 @@ ImageView hien;
         if (!isPasswordVisible) {
            pass.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
             isPasswordVisible = true;
+            hien.setImageResource(R.drawable.baseline_remove_red_eye_24);
         } else {
            pass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             isPasswordVisible = false;
+            hien.setImageResource(R.drawable.hide__2_);
         }
     }
 });

@@ -8,6 +8,9 @@
     tools:context=".Activity.Phong">
 
     <ListView
+        android:divider="@null"
+        android:dividerHeight="15dp"
+        android:padding="15dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/list_phong"

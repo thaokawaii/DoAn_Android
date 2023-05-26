@@ -3,7 +3,9 @@ package com.example.order_room.Activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
@@ -16,7 +18,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.example.order_room.Adapter.DataLocalManager;
 import com.example.order_room.Model.KHACHHANG;
+import com.example.order_room.Model.User;
 import com.example.order_room.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,6 +39,9 @@ final int gt=1;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dang_ki);
 
+
+        DataLocalManager.init(getApplicationContext());
+        User user= DataLocalManager.getUser();
         anhxa();
         dangnhap();
 
@@ -76,7 +83,7 @@ final int gt=1;
 
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(kiemtra()==true)
+                        if(kiemtra()==true&&ktpass()==true)
                         {
                             if(snapshot.child(sdt.getText().toString()).exists()) {
                                 dialog.dismiss();
@@ -87,13 +94,15 @@ final int gt=1;
                                 dialog.dismiss();
                                 KHACHHANG kh=new KHACHHANG(diachi.getText().toString(),email.getText().toString(),traveGT(),ten.getText().toString(),matkhau.getText().toString(),sdt.getText().toString());
                                 table_kh.child(sdt.getText().toString()).setValue(kh);
+                                User user1=new User(matkhau.getText().toString(),sdt.getText().toString());
+                                DataLocalManager.setUser(user1);
                                 Toast.makeText(DangKi.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
                                 Intent i=new Intent(DangKi.this,TrangChu.class);
                                 startActivity(i);
                                 finish();
 
 
-                            }
+                        }
                         }
                         else
                         {
@@ -138,11 +147,43 @@ final int gt=1;
             return true;
         }
     }
-    private void ktpass() {
-        if (!matkhau.getText().toString().trim().equals(xnpass.getText().toString().trim())) {
-            xnpass.setError("Mật khẩu không khớp!");
-            Toast.makeText(this, "Khong khop", Toast.LENGTH_SHORT).show();
+    private boolean ktpass() {
+
+        String password1 = matkhau.getText().toString();
+        String password2 = xnpass.getText().toString();
+
+
+        if (password1.equals(password2)) {
+         return true;
+
+        } else {
+            thongbao();
+            return false;
+
         }
+
+    }
+    public void thongbao()
+    {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+
+        builder.setTitle("Thông báo lỗi");
+        builder.setMessage("Mật khẩu không trùng khớp");
+
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.dismiss();
+            }
+        });
+
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
     }
 
 }

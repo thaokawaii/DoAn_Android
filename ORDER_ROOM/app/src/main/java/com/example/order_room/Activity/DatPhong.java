@@ -7,7 +7,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.util.Pair;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.icu.text.DecimalFormat;
 import android.icu.text.NumberFormat;
@@ -59,6 +61,8 @@ public class DatPhong extends AppCompatActivity {
     int tongtien;
     TextView tong;
     ImageView back;
+    TextView ngaynhan;
+    TextView ngaytra;
 
     ListView listView;
     private DatabaseReference databaseReference;
@@ -70,6 +74,9 @@ public class DatPhong extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dat_phong);
+
+        ngaynhan=findViewById(R.id.chon_ngaynhan);
+        ngaytra=findViewById(R.id.chon_ngaytra);
 
        back=findViewById(R.id.back_dondat);
        back.setOnClickListener(new View.OnClickListener() {
@@ -94,33 +101,38 @@ public class DatPhong extends AppCompatActivity {
         gia();
         if(! MAKS.isEmpty()&& MAKS!=null&&! MALOAI.isEmpty()&& MALOAI!=null&&! MAPH.isEmpty()&& MAPH!=null) {
 
-            btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                   try {
-                       FirebaseDatabase database = FirebaseDatabase.getInstance();
-                       DatabaseReference myRef = database.getReference("CTHOADON");
-                       HOADON hd = new HOADON();
-                       hd.setMAKH(MAKH);
-                       hd.setMAKS(MAKS);
-                       hd.setMALOAI(MALOAI);
-                       hd.setMAPH(MAPH);
-                       hd.setNGAYDAT(DateNow);
-                       hd.setNGAYNHAN(editText.getText().toString());
-                       hd.setNGAYTRA(editText1.getText().toString());
-                       hd.setTINHTRANG("Chưa thanh toán");
-                       hd.setTONGTIEN(tong.getText().toString());
-                       myRef.push().setValue(hd);
+      btn.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              if(ngaynhan.getText().length()==0||ngaytra.getText().length()==0)
+              {
+                  thongbao();
+              }
+              else {
+                  try {
+                      FirebaseDatabase database = FirebaseDatabase.getInstance();
+                      DatabaseReference myRef = database.getReference("CTHOADON");
+                      HOADON hd = new HOADON();
+                      hd.setMAKH(MAKH);
+                      hd.setMAKS(MAKS);
+                      hd.setMALOAI(MALOAI);
+                      hd.setMAPH(MAPH);
+                      hd.setNGAYDAT(DateNow);
+                      hd.setNGAYNHAN(editText.getText().toString());
+                      hd.setNGAYTRA(editText1.getText().toString());
+                      hd.setTINHTRANG("Chưa thanh toán");
+                      hd.setTONGTIEN(tong.getText().toString());
+                      myRef.push().setValue(hd);
 
-                       Toast.makeText(DatPhong.this, "Thành công", Toast.LENGTH_SHORT).show();
-                   }
-                   catch (Exception ex)
-                   {
-                       Toast.makeText(DatPhong.this, "Lỗi thấy bà gòi", Toast.LENGTH_SHORT).show();
-                   }
+                      Toast.makeText(DatPhong.this, "Thành công", Toast.LENGTH_SHORT).show();
+                  } catch (Exception ex) {
+                      Toast.makeText(DatPhong.this, "Lỗi thấy bà gòi", Toast.LENGTH_SHORT).show();
+                  }
+              }
 
-                }
-            });
+          }
+      });
+
 
         }
         loadRoom();
@@ -278,6 +290,28 @@ public class DatPhong extends AppCompatActivity {
 
         listView = findViewById(R.id.list_ct);
         listView.setAdapter(Adapter);
+
+    }
+    public void thongbao()
+    {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+
+        builder.setTitle("Thông báo lỗi");
+        builder.setMessage("Không được để trống ngày nhận trả phòng");
+
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.dismiss();
+            }
+        });
+
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
 
     }
 }
