@@ -57,6 +57,8 @@ public class KhachSanAdapter extends BaseAdapter {
         //Bind sữ liệu phần tử vào View
         KHACHSAN ks = (KHACHSAN) getItem(position);
        TextView name= viewProduct.findViewById(R.id.name_ks);
+       TextView diachi=viewProduct.findViewById(R.id.diachi_ks);
+       diachi.setText(ks.getDIACHI());
         name.setText(ks.getTENKS());
         ImageView imageView=viewProduct.findViewById(R.id.ks_image);
         Picasso.get().load(ks.getANH()).into(imageView);

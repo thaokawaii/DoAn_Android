@@ -9,15 +9,18 @@
         android:orientation="vertical"
         >
         <ImageView
+            android:scaleType="centerCrop"
             android:id="@+id/image_room"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:src="@drawable/common_google_signin_btn_icon_light"
             ></ImageView>
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/ten_room"
+
+            android:text="ddddd"
             >
 
         </TextView>
@@ -25,7 +28,7 @@
             android:id="@+id/mota_room"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
+
             android:text="ddddddddddđ"
             />
         <LinearLayout

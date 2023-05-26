@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.order_room.Adapter.KhachSanAdapter;
 import com.example.order_room.Adapter.LoaiPhongAdapter;
@@ -42,14 +43,7 @@ public class Phong extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phong);
-imageView=findViewById(R.id.back_loaiph);
-imageView.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        Intent intent=new Intent(Phong.this,Loai.class);
-        startActivity(intent);
-    }
-});
+
         loadRoom();
     }
 
@@ -75,7 +69,11 @@ imageView.setOnClickListener(new View.OnClickListener() {
                         PHONG item = dataSnapshot.getValue(PHONG.class);
                         if (item.getMAKS().equals(MaKs) && item.getMALOAI().equals(MaLoai)) {
 
+                             if(item.getTINHTRANG().equals("0"))
+                             {
+                                 TextView tinhtrang=findViewById(R.id.tinhtrang_room);
 
+                             }
                             list_phong.add(item);
 
                             load();

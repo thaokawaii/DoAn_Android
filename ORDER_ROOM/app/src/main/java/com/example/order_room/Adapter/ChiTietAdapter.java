@@ -2,31 +2,24 @@ package com.example.order_room.Adapter;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.icu.text.DecimalFormat;
-import android.icu.text.NumberFormat;
-import android.text.Layout;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.order_room.Activity.Phong;
-import com.example.order_room.Model.LOAIPHONG;
 import com.example.order_room.Model.PHONG;
 import com.example.order_room.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
-public class PhongAdapter extends BaseAdapter {
+public class ChiTietAdapter extends BaseAdapter {
     private ArrayList<PHONG> list_ph;
     private Context context;
 
 
-    public PhongAdapter(ArrayList<PHONG> list_ph, Context context) {
+    public ChiTietAdapter(ArrayList<PHONG> list_ph, Context context) {
         this.list_ph = list_ph;
         this.context = context;
     }
@@ -60,20 +53,20 @@ public class PhongAdapter extends BaseAdapter {
         TextView mota=viewProduct.findViewById(R.id.mota_room);
         TextView tinhtrang=viewProduct.findViewById(R.id.tinhtrang_room);
 
-           PHONG ph= (PHONG) getItem(position);
-    name.setText(ph.getTENPH());
-    mota.setText(ph.getMOTA());
-    if(ph.getTINHTRANG().equals("0")) {
-        tinhtrang.setText("Trống");
-        tinhtrang.setTextColor(Color.GREEN);
-    }
-    else {
-        tinhtrang.setText("Đã được thuê");
-        tinhtrang.setTextColor(Color.RED);
-        name.setTextColor(Color.RED);
-        mota.setTextColor(Color.RED);
+        PHONG ph= (PHONG) getItem(position);
+        name.setText(ph.getTENPH());
+        mota.setText(ph.getMOTA());
+        if(ph.getTINHTRANG().equals("0")) {
+            tinhtrang.setText("Trống");
+            tinhtrang.setTextColor(Color.GREEN);
+        }
+        else {
+            tinhtrang.setText("Đã được thuê");
+            tinhtrang.setTextColor(Color.RED);
+            name.setTextColor(Color.RED);
+            mota.setTextColor(Color.RED);
 
-    }
+        }
 
 
         Picasso.get().load(ph.getANH()).into(imageView);
@@ -85,3 +78,4 @@ public class PhongAdapter extends BaseAdapter {
         return viewProduct;
     }
 }
+

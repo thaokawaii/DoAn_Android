@@ -39,11 +39,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/content_frame">
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/anh"
-                ></ImageView>
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/list_hd"/>
         </FrameLayout>
     </LinearLayout>
     <com.google.android.material.navigation.NavigationView

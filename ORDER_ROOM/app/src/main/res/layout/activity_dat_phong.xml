@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+
 
     tools:context=".Activity.DatPhong">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:id="@+id/list_ct"
+            >
+
+        </ListView>
 <androidx.cardview.widget.CardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -58,18 +69,25 @@
                 android:textSize="20dp"
                 android:textColor="@color/purple_200"
                 android:textStyle="bold"/>
+
             <TextView
-                android:layout_marginLeft="10dp"
+                android:id="@+id/tongTien"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tongTien"
+                android:layout_marginLeft="10dp"
                 android:text="10000"
-                android:textSize="20dp"
                 android:textColor="@color/black"
+                android:textSize="20dp"
 
                 >
 
             </TextView>
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="VND"
+                ></TextView>
 
 
         </LinearLayout>
@@ -83,7 +101,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom">
+        android:layout_gravity="bottom"
+        android:orientation="vertical">
 
         <Button
             android:layout_width="match_parent"
@@ -95,7 +114,34 @@
             android:textColor="@color/white"
              android:id="@+id/datPhong"
             android:textStyle="bold" />
+
+
     </LinearLayout>
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentEnd="true">
+
+            <ImageView
+                android:id="@+id/back_dondat"
+                android:background="@drawable/button_back"
+               android:layout_margin="50dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:autofillHints="phone"
+                android:src="@drawable/baseline_shopping_cart_24" />
+        </androidx.appcompat.widget.Toolbar>
+
+    </RelativeLayout>
 
 
-</LinearLayout>
+</RelativeLayout>
