@@ -75,17 +75,17 @@ String MAKH;
 
                     load();
                 }
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        HOADON ks= (HOADON) hoaDonAdapter.getItem(position);
-                        Intent intent=new Intent(DonDat.this,Phong.class);
-                        intent.putExtra("MAKS",ks.getMAKS());
-                        intent.putExtra("MALOAI",ks.getMALOAI());
-                        startActivity(intent);
-
-                    }
-                });
+//                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                        HOADON ks= (HOADON) hoaDonAdapter.getItem(position);
+//                        Intent intent=new Intent(DonDat.this,Phong.class);
+//                        intent.putExtra("MAKS",ks.getMAKS());
+//                        intent.putExtra("MALOAI",ks.getMALOAI());
+//                        startActivity(intent);
+//
+//                    }
+//                });
 
 
             }
@@ -129,10 +129,18 @@ String MAKH;
 
                         return true;
                     case R.id.Logout:
+                        DataLocalManager.init(getApplicationContext());
+                        User user= DataLocalManager.getUser();
+                        DataLocalManager.remove(user);
                         Toast.makeText(DonDat.this, "Đăng xuất", Toast.LENGTH_SHORT).show();
                         Intent y=new Intent(DonDat.this,DangNhap.class);
                         startActivity(y);
 
+                        return true;
+                    case R.id.user:
+                        Toast.makeText(DonDat.this, "Tài khoản", Toast.LENGTH_SHORT).show();
+                        Intent v=new Intent(DonDat.this,TaiKhoan.class);
+                        startActivity(v);
                         return true;
 
                 }

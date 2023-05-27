@@ -170,6 +170,12 @@ public class TrangChu extends AppCompatActivity {
                         startActivity(y);
 
                         return true;
+                    case R.id.user:
+                        Toast.makeText(TrangChu.this, "Tài khoản", Toast.LENGTH_SHORT).show();
+                        Intent v=new Intent(TrangChu.this,TaiKhoan.class);
+                        startActivity(v);
+                        return true;
+
 
                 }
                 return false;

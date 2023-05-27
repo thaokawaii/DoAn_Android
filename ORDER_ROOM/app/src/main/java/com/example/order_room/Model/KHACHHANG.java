@@ -18,7 +18,19 @@ public class KHACHHANG {
     public KHACHHANG() {
     }
 
-    public KHACHHANG(String DIACHI, String EMAIL, String GT, String HOTEN,String MATKHAU,String SDT) {
+    @Override
+    public String toString() {
+        return "KHACHHANG{" +
+                "HOTEN='" + HOTEN + '\'' +
+                ", DIACHI='" + DIACHI + '\'' +
+                ", EMAIL='" + EMAIL + '\'' +
+                ", GT='" + GT + '\'' +
+                ", MATKHAU='" + MATKHAU + '\'' +
+                ", SDT='" + SDT + '\'' +
+                '}';
+    }
+
+    public KHACHHANG(String DIACHI, String EMAIL, String GT, String HOTEN, String MATKHAU, String SDT) {
         this.HOTEN = HOTEN;
         this.DIACHI = DIACHI;
         this.EMAIL = EMAIL;
