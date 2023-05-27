@@ -112,7 +112,7 @@ chon();
                                     gt.setText(k.getGT());
                                     email.setText(k.getEMAIL());
                                     matkhau.setText(k.getMATKHAU());
-                                    Toast.makeText(TaiKhoan.this, k.toString(), Toast.LENGTH_SHORT).show();
+                              
 
                                 }
 

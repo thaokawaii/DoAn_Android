@@ -98,7 +98,7 @@ public class HoaDonAdapter extends BaseAdapter {
                                                 HoaDonAdapter.this.notifyDataSetChanged();
 
 
-                                                Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(context, "Hủy đơn thành công", Toast.LENGTH_SHORT).show();
                                             }
 
 

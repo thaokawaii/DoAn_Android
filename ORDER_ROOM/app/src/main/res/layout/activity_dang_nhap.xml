@@ -82,7 +82,7 @@
               android:layout_gravity="center"
               android:layout_width="20dp"
               android:layout_height="wrap_content"
-              android:src="@drawable/baseline_remove_red_eye_24"
+              android:src="@drawable/hide__2_"
               ></ImageView>
 
         </LinearLayout>
