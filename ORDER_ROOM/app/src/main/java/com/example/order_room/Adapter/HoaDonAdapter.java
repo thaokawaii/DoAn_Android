@@ -97,6 +97,8 @@ public class HoaDonAdapter extends BaseAdapter {
                                                 HoaDonAdapter.this.list.remove(position);
                                                 HoaDonAdapter.this.notifyDataSetChanged();
 
+                                                viewProduct.notify();
+
 
                                                 Toast.makeText(context, "Hủy đơn thành công", Toast.LENGTH_SHORT).show();
                                             }
